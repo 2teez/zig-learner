@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Date: 25-12-25
+# Author: omitida
+# Description:
+# Bash script for making and running zig-lang files.
+#
+#
+function avaliable_option() {
+    echo
+    echo "Usage: ${0} <-option> <filename>"
+    echo "Avaliable Option"
+    echo "================"
+    echo "-b:   build a zig file."
+    echo "-c:   compile a zig file and run a compile file."
+    echo "-g:   make a generic zig file."
+    echo "-h:   display this help function and options."
+    echo "-r:   run a compile file."
+}
+
+if [[ "${#}" -ne 2 ]]; then
+   avaliable_option
+   exit 1
+fi
+
+opstring="b:c:g:r:h"
+
+while getopts "${opstring}" opt; do
+    case "${opt}" in
+        b)
+            ;;
+        c)
+            ;;
+        g)
+            ;;
+        r)
+            ;;
+        h)
+            avaliable_option
+            ;;
+        *)
+    esac
+done
