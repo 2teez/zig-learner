@@ -68,6 +68,14 @@ opstring="b:c:g:r:h"
 while getopts "${opstring}" opt; do
     case "${opt}" in
         b)
+            filename="${OPTARG}"
+            check_extention "${filename}"
+
+            zig build-exe "${filename}"
+            compile_file="${filename%.*}"
+            ./"${compile_file}"
+
+            rm "${compile_file}"
             ;;
         c)
             filename="${OPTARG}"
