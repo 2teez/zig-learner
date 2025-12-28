@@ -17,6 +17,47 @@ function avaliable_option() {
     echo "-r:   run a compile file."
 }
 
+#global name filename
+filename=
+
+function check_extention() {
+    filename="${1}"
+    extention="${filename#*.}"
+    [[ "$extention" != "zig" ]] && filename="${filename%.*}.zig"
+}
+
+function create_zig_file() {
+    filename="${1}"
+    check_extention "${filename}"
+    file_to_write="
+    const std = @import(\"std\");
+
+    pub fn main() void {
+        std.debug.print(\"Start from here!\\n\", .{});
+    }
+    "
+    if [[ -e "${filename}" ]]; then
+        while read -p "${filename} exist. Do you want to overwrite it? [Y|N]: " ans; do
+            case "${ans,,}" in
+                y)
+                    echo "${file_to_write}" > "${filename}"
+                    echo "${filename} overwriten!"
+                    exit 0
+                    ;;
+                n)
+                    echo "${filename}. Not changed!"
+                    exit 0
+                    ;;
+                *)
+                    echo "Invalid input use only Y and N"
+            esac
+       done
+    else
+        echo "${file_to_write}" > "${filename}"
+    fi
+    [[ -z "${filename}" ]] && echo "${file_to_write}" > "${filename}"
+}
+
 if [[ "${#}" -ne 2 ]]; then
    avaliable_option
    exit 1
@@ -29,10 +70,25 @@ while getopts "${opstring}" opt; do
         b)
             ;;
         c)
+            filename="${OPTARG}"
+            create_zig_file "${filename}"
             ;;
         g)
+            filename="${OPTARG}"
+            ${0} -r "${filename}"
+
             ;;
         r)
+            filename="${OPTARG}"
+            check_extention "${filename}"
+
+           if  [[ -e "${filename}" ]]; then
+               zig run "${filename}"
+               exit 0
+           else
+               ${0} -c "${filename}"
+               zig run "${filename}"
+            fi
             ;;
         h)
             avaliable_option
