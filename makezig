@@ -10,11 +10,13 @@ function avaliable_option() {
     echo "Usage: ${0} <-option> <filename>"
     echo "Avaliable Option"
     echo "================"
-    echo "-b:   build a zig file."
-    echo "-c:   compile a zig file and run a compile file."
-    echo "-g:   make a generic zig file."
-    echo "-h:   display this help function and options."
-    echo "-r:   run a compile file."
+    echo "-b:   Build a zig file."
+    echo "-c:   Compile a zig file and run a compile file."
+    echo "-d    Delete the specified folder or file"
+    echo "-g:   Make a generic zig file."
+    echo "-h:   Display this help function and options."
+    echo "-p    Building Zig Project, with zig file structure."
+    echo "-r:   Run a compile file."
 }
 
 #global name filename
@@ -24,9 +26,6 @@ function check_extention() {
     filename="${1}"
     extention="${filename#*.}"
     [[ "$extention" != "zig" ]] && filename="${filename%.*}.zig"
-
-    # format zif file
-    zig fmt "${filename}"
 }
 
 function create_zig_file() {
@@ -59,6 +58,9 @@ function create_zig_file() {
         echo "${file_to_write}" > "${filename}"
     fi
     [[ -z "${filename}" ]] && echo "${file_to_write}" > "${filename}"
+
+    # format zif file
+    zig fmt "${filename}"
 }
 
 if [[ "${#}" -ne 2 ]]; then
@@ -83,6 +85,15 @@ while getopts "${opstring}" opt; do
         c)
             filename="${OPTARG}"
             create_zig_file "${filename}"
+            ;;
+        d)
+            filename="${OPTARG}"
+            if [[ -d "${filename}" ]]; then
+                rmdir "${filename}"
+                exit 0
+            fi
+            rm "${filename}"
+            echo "${filename} Deleted Successfully."
             ;;
         g)
             filename="${OPTARG}"
