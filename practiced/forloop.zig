@@ -46,4 +46,14 @@ pub fn main() void {
     if (stoppedAt) {
         std.debug.print("Stopped at index {}\n", .{stoppedindex});
     }
+
+    // using nullable values in zig-lang
+    const nnums = [_]?i32{ 5, 0, null, 3, 5, null, -2 };
+    sum = 0;
+    for (nnums, 0..) |value, idx| {
+        if (value) |defined_value| {
+            sum += defined_value;
+        } else std.debug.print("Number in index {} is null\n", .{idx});
+    }
+    std.debug.print("Summation is {}\n", .{sum});
 }
