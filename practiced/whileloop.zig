@@ -10,4 +10,10 @@ pub fn main() void {
         i += 1;
     }
     std.debug.print("i is {}\n", .{i});
+    // while with expression
+    var ch: u8 = 'a';
+    while (ch <= 'z') : (ch += 1) {
+        std.debug.print("{} ", .{ch});
+    }
+    std.debug.print("\n", .{});
 }
