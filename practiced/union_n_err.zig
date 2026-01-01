@@ -7,8 +7,8 @@ const Data = union { // union like in C
 };
 
 const Result = union(enum) {
-    success: i32,
-    failure: []const u8,
+    Success: i32,
+    Error: []const u8,
 };
 
 pub fn main() void {
@@ -26,11 +26,16 @@ pub fn main() void {
     }
 
     // calculate using negative number
+    const result = calculate(-5);
+    switch (result) {
+        .Success => |value| print("{d}\n", .{value}),
+        .Error => |err_msg| print("{s}\n", .{err_msg}),
+    }
 }
 
 pub fn calculate(value: i32) Result {
     if (value >= 0) {
-        return Result{ .success = value * 34 };
+        return Result{ .Success = value * 34 };
     }
-    return Result{ .failure = "Nagative value provided." };
+    return Result{ .Error = "input must be non-negative" };
 }
