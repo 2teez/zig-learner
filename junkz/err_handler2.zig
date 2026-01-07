@@ -1,7 +1,11 @@
 const std = @import("std");
 
-pub fn main() !void {
-    try top_function();
+pub fn main() void {
+    top_function() catch |err| {
+        std.debug.print("Error found: {}\n", .{err});
+        return;
+    };
+    std.debug.print("No error found\n", .{});
 }
 
 fn top_function() !void {
@@ -13,5 +17,5 @@ fn mid_function() !void {
 }
 
 fn bottom_function() !void {
-    return error.FileNotFound();
+    return error.FileNotFound;
 }
