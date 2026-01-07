@@ -8,14 +8,14 @@ fn square(number: i32) i32 {
     return number * number;
 }
 
-fn parseInt(value: []const u8) !i32 {
-    return std.fmt.parseInt(i32, value, 10);
-}
-
 test "square function should return the square of the number" {
     try std.testing.expect(square(3) == 9);
     try std.testing.expect(square(-4) == 16);
     try std.testing.expect(square(0) == 0);
+}
+
+fn parseInt(value: []const u8) !i32 {
+    return std.fmt.parseInt(i32, value, 10);
 }
 
 test "parse a string to a number. The test should fail" {
