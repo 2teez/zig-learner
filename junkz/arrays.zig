@@ -1,5 +1,11 @@
 const std = @import("std");
 
 pub fn main() void {
-    std.debug.print("Start from here!\n", .{});
+    const msg = [_]u8{ 'h', 'e', 'l', 'l', 'o' };
+    const alt_msg: [5]u8 = .{ 'h', 'e', 'l', 'l', 'o' };
+    comptime {
+        const mem = std.mem;
+        const assert = std.debug.assert;
+        assert(mem.eql(u8, &msg, &alt_msg));
+    }
 }
