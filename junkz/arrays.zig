@@ -7,5 +7,6 @@ pub fn main() void {
         const mem = std.mem;
         const assert = std.debug.assert;
         assert(mem.eql(u8, &msg, &alt_msg));
+        assert(msg.len == 5);
     }
 }
