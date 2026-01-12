@@ -12,7 +12,7 @@ pub fn main() void {
         const assert = std.debug.assert;
         assert(mem.eql(u8, &msg, &alt_msg));
         assert(msg.len == 5);
-        assert(mem.eql(&[_]i32{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, &combined));
+        assert(mem.eql(i32, &combined, &[_]i32{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }));
     }
 }
 
