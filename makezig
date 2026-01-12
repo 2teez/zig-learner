@@ -17,6 +17,7 @@ function avaliable_option() {
     echo "-h:   Display this help function and options."
     echo "-p    Building Zig Project, with zig file structure."
     echo "-r:   Run a compile file."
+    echo "-t:   Test a zig file."
 }
 
 #global name filename
@@ -68,7 +69,7 @@ if [[ "${#}" -ne 2 ]]; then
    exit 1
 fi
 
-opstring="b:c:d:g:r:p:h"
+opstring="b:c:d:g:r:t:p:h"
 
 while getopts "${opstring}" opt; do
     case "${opt}" in
@@ -129,6 +130,12 @@ while getopts "${opstring}" opt; do
             zig build
             ./zig-out/bin/"${filename%.*}"
             zig build test
+            ;;
+
+        t)
+            filename="${OPTARG}"
+            zig test "${filename}"
+
             ;;
         h)
             avaliable_option
