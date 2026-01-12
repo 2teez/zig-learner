@@ -4,11 +4,15 @@ const expect = std.testing.expect;
 pub fn main() void {
     const msg = [_]u8{ 'h', 'e', 'l', 'l', 'o' };
     const alt_msg: [5]u8 = .{ 'h', 'e', 'l', 'l', 'o' };
+    const part_one = [_]i32{ 1, 2, 3, 4, 5 };
+    const part_two = [_]i32{ 6, 7, 8, 9, 10 };
+    const combined = part_one ++ part_two;
     comptime {
         const mem = std.mem;
         const assert = std.debug.assert;
         assert(mem.eql(u8, &msg, &alt_msg));
         assert(msg.len == 5);
+        assert(mem.eql(&[_]i32{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, &combined));
     }
 }
 
