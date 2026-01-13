@@ -12,3 +12,11 @@ test "basic array and slicing" {
     try std.testing.expect(array[0] == 56);
     try std.testing.expect(array[3] == 90);
 }
+
+test "slicing of array" {
+    var array = [_]u16{ 56, 89, 23, 90 };
+    const subset_counter: usize = 1;
+    _ = &subset_counter;
+    const subset = array[subset_counter..3];
+    try std.testing.expect(subset.len == 2);
+}
