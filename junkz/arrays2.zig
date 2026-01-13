@@ -22,7 +22,7 @@ test "slicing of array" {
 }
 
 test "string are just array of bytes" {
-    const words = "Caldara's Blaza";
+    const words: []const u8 = "Caldara's Blaza"; // OR // const worda = "Caldara's Blaza"[0..]
     var length_str: usize = 9;
     _ = &length_str;
     const subset_wrd = words[length_str + 1 ..];
