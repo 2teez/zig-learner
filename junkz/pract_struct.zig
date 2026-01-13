@@ -13,3 +13,12 @@ test "basic struct in zig" {
     try expect(perl.age == 21);
     try expect(perl.height == 12.34);
 }
+
+test "using anonymous struct" {
+    try check(.{ .name = "elixir", .age = 8 });
+}
+
+fn check(lang: anytype) !void {
+    try expect(std.mem.eql(u8, lang.name, "elixir"));
+    try expect(lang.age == 8);
+}
