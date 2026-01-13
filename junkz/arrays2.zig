@@ -20,3 +20,12 @@ test "slicing of array" {
     const subset = array[subset_counter..3];
     try std.testing.expect(subset.len == 2);
 }
+
+test "string are just array of bytes" {
+    const words = "Caldara's Blaza";
+    var length_str: usize = 9;
+    _ = &length_str;
+    const subset_wrd = words[length_str + 1 ..];
+    try std.testing.expect(@TypeOf(subset_wrd) == []const u8);
+    try std.testing.expect(std.mem.eql(u8, subset_wrd, "Blaza"));
+}
