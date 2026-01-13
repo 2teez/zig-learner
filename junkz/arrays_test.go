@@ -23,3 +23,14 @@ func TestLengthOfArray(t *testing.T) {
 		t.Errorf("Got: %d - Wanted: %d\n", got, req)
 	}
 }
+
+func TestSliceOfArray(t *testing.T) {
+	t.Parallel()
+	const words = "Caldara's Blaza"
+	subset_string := words[9 : len(words)-1]
+	got := len(subset_string)
+	wanted := len("Blaza")
+	if wanted != got {
+		t.Errorf("Wanted: %d - Got: %d\n", wanted, got)
+	}
+}
