@@ -22,3 +22,9 @@ fn check(lang: anytype) !void {
     try expect(std.mem.eql(u8, lang.name, "elixir"));
     try expect(lang.age == 8);
 }
+
+test "tuples" {
+    const person = .{ "rusty", 10 };
+    try expect(std.mem.eql(u8, person[0], "rusty"));
+    try expect(person[1] == 10);
+}
