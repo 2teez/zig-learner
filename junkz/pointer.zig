@@ -15,3 +15,12 @@ test "checking pointer in zig" {
 
     try expect(other_number == 100);
 }
+
+test "pointer and array" {
+    var numbers = [_]u8{ 1, 2, 3, 4, 5 };
+    const slot_pt = &numbers[2];
+    try expect(@TypeOf(slot_pt) == *u8);
+
+    slot_pt.* += 1;
+    try expect(slot_pt.* == 4);
+}
