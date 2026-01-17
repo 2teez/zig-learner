@@ -32,3 +32,11 @@ test "single to many pointer" {
     try expect(@TypeOf(number_many_ptr) == [*]i32);
     try expect(number_many_ptr[0] == 5687);
 }
+
+test "pointer arithematic" {
+    const array = [_]i32{ 1, 2, 3, 4 };
+    var array_ptr: [*]const i32 = &array;
+    try expect(array_ptr[0] == 1);
+    array_ptr += 1;
+    try expect(array_ptr[0] == 2);
+}
