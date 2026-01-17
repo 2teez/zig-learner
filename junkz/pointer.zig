@@ -24,3 +24,11 @@ test "pointer and array" {
     slot_pt.* += 1;
     try expect(slot_pt.* == 4);
 }
+
+test "single to many pointer" {
+    var number: i32 = 5687;
+    const number_ptr = &number;
+    const number_many_ptr: [*]i32 = number_ptr[0..1];
+    try expect(@TypeOf(number_many_ptr) == [*]i32);
+    try expect(number_many_ptr[0] == 5687);
+}
