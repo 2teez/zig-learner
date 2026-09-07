@@ -40,7 +40,7 @@ function create_zig_file() {
     }
     "
     if [[ -e "${filename}" ]]; then
-        while read -p "${filename} exist. Do you want to overwrite it? [Y|N]: " ans; do
+        while read -r -p "${filename} exist. Do you want to overwrite it? [Y|N]: " ans; do
             case "${ans,,}" in
                 y)
                     echo "${file_to_write}" > "${filename}"
