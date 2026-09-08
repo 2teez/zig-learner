@@ -6,4 +6,7 @@ void main() {
     result += item;
   }
   print("The sum of ${items} numbers is $result");
+  print("The result of adding 3 and 5 is ${add(3, 5)}");
 }
+
+int add(int a, int b) => a + b;
