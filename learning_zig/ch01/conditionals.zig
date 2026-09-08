@@ -14,4 +14,24 @@ pub fn main() void {
     } else {
         print("b is equal to 5\n", .{});
     }
+    // if expression in print statement
+    print("b is {s}\n", .{if (b >= 5) "greater than or equal to 5" else "less than 5"});
+    // using switch statement
+    switch (a) {
+        1 => print("a is 1\n", .{}),
+        2 => print("a is 2\n", .{}),
+        3 => print("a is 3\n", .{}),
+        4 => print("a is 4\n", .{}),
+        5 => print("a is 5\n", .{}),
+        else => print("a is greater than 5\n", .{}),
+    }
+    // using switch expression in print statement
+    print("b is {s}\n", .{switch (b) {
+        1 => "1",
+        2 => "2",
+        3 => "3",
+        4 => "4",
+        5 => "5",
+        else => "6",
+    }});
 }
