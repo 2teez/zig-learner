@@ -124,7 +124,7 @@ while getopts "${opstring}" opt; do
                 exit 1
             fi
 
-            cd "${filename}"
+            cd "${filename}" || exit 1
 
             zig init # initialize the project
             zig build
