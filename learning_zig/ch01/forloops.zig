@@ -32,4 +32,27 @@ pub fn main() void {
         print("Found even number at index {}\n", .{count_index});
     }
     print("Sum of odd numbers: {}\n", .{sum});
+
+    // using labelled switch
+    traffic_light: switch (@as(u8, 1)) {
+        1 => {
+            print("Red. All cars stopped.\n", .{});
+            continue :traffic_light 2;
+        },
+        2 => {
+            print("Green. All cars moving.\n", .{});
+            continue :traffic_light 3;
+        },
+        3 => {
+            print("Yellow. All cars slowing down and ready to stop.\n", .{});
+            continue :traffic_light 4;
+        },
+        4 => {
+            print("Red. All cars stopped. Predestrians crossing the road.\n", .{});
+            return;
+        },
+        else => {
+            print("Invalid traffic light state: {}\n", .{@as(u8, 1)});
+        },
+    }
 }
