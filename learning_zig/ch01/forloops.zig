@@ -16,4 +16,20 @@ pub fn main() void {
         total += item2 + item3;
     }
     print("The total is {}\n", .{total});
+
+    // using for loop and else
+    const numbers = [_]i32{ 3, 1, 2, 4 };
+    var count_index: usize = 0;
+    var sum: i32 = 0;
+    const checks = for (0.., numbers) |index, number| {
+        if (@mod(number, 2) == 0) {
+            count_index = index;
+            break true;
+        }
+        sum += number;
+    } else false;
+    if (checks) {
+        print("Found even number at index {}\n", .{count_index});
+    }
+    print("Sum of odd numbers: {}\n", .{sum});
 }
