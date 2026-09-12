@@ -44,6 +44,6 @@ test "safeSquare should return an error on overflow" {
     try std.testing.expectError(error.Overflow, safeSquare(1000000));
 }
 
-test "this test is not ready" {
+test "this function is not ready" {
     return error.SkipZigTest;
 }
