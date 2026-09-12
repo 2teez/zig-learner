@@ -14,6 +14,26 @@ fn safeSquare(num: i32) !i32 {
     return ov[0];
 }
 
+fn parseInt(str: []const u8) !i32 {
+    const result = std.fmt.parseInt(i32, str, 10) catch |err| {
+        return err;
+    };
+    return result;
+}
+
+test "parseInt function should return an error" {
+    try std.testing.expectError(error.InvalidCharacter, parseInt("hello integer"));
+}
+
+test "parseInt function should return the parsed integer" {
+    const result = try parseInt("42");
+    try std.testing.expect(result == 42);
+}
+
+test "parseInt function with float should return an error" {
+    try std.testing.expectError(error.InvalidCharacter, parseInt("42.5"));
+}
+
 test "square function should return the square of a number" {
     try std.testing.expect(square(3) == 9);
     try std.testing.expect(square(-6) == 36);
